@@ -15,5 +15,12 @@
         
         <button type="submit">Envoyer</button>
     </form>
+    <?php if($error) {?>
+        <p><?=htmlspecialchars($error)?></p>
+    <?php }?>
+    
+    <?php if ($success) {?>
+        <p><?=htmlspecialchars($success)?></p>
+    <?php }?>
 </body>
 </html>

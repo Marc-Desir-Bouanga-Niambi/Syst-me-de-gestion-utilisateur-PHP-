@@ -8,13 +8,21 @@
 <body>
     <form action="" method='POST'>
         <label for="email">Veuillez insérer votre email : </label><br>
-        <input type="email" name="input"><br><br>
+        <input type="email" name="email"><br><br>
 
         <label for="password">Veuillez rentrez votre mot de passe : </label><br>
         <input type="password" name="password"><br><br>
         
         <button type="submit">Envoyer</button>
     </form>
+
+    <?php if($success) { ?>
+        <p><?= htmlspecialchars($success) ?></p>
+    <?php }?>
+
+    <?php if($error) { ?>
+        <p><?= htmlspecialchars($error) ?></p>
+    <?php }?>
 
       
 </body>

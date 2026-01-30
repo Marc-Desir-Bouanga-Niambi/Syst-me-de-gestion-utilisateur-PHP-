@@ -1,19 +1,21 @@
 <?php
 require_once 'controllers/usercontroller.php';
+require_once 'database.php';
 
-$action = $_GET['action'] ?? 'home';
+$method = $_SERVER['REQUEST_METHOD'];
+$action = $_GET['action'] ?? 'login';
 
 
 switch($action) {
 
 case 'login':
-        $controller = new UserController();
-        $controller->login();
+        $controller = new UserController($pdo);
+        $controller->login($method);
         break;
 
     case 'register':
-        $controller = new UserController();
-        $controller->register();
+        $controller = new UserController($pdo);
+        $controller->register($method);
         break;
 
     case 'profile':

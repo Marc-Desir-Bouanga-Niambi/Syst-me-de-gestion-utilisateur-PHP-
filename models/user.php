@@ -1,17 +1,29 @@
 <?php
+require_once "database.php";
+
 class User {
+    private $pdo;
 
-    private $users = [
-        ['id' => 1, 'name' => 'Alice'],
-        ['id' => 2, 'name' => 'Bob'],
-        ['id' => 3, 'name' => 'Charlie']
-    ];
-
-    public function findByEmail($email) {
-
+    public function __construct(PDO $pdo) {
+        $this->pdo = $pdo;
     }
 
-    public function createUser () {
+    public function findByEmail($email) {
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email= :email");
+        $stmt->execute([
+            'email' => $email
+        ]);
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); 
+    }
+
+    public function createUser ($email, $password_hash) {
+        $stmt = $this->pdo->prepare("INSERT INTO users(email,password) VALUES(:email,:password) ");
+        $stmt->execute([
+            'email'=>$email,
+            'password'=>$password_hash
+        ]);  
+
 
     }
 
