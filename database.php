@@ -14,9 +14,8 @@ try {
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]
     );
-    echo "Connexion réussie";
 } catch (PDOException $e) {
-    echo "Erreur de connexion :" . $e-> getMessage();
+    echo "Erreur de connexion à la base de données:" . $e-> getMessage();
 }
 
 

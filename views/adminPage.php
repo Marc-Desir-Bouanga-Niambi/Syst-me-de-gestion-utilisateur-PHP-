@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <?php if($_SESSION['role'] === 'admin') { ?>
-        <a href="?action=adminPage">Espace admin</a>
+    <?php if($greeting) { ?>
+        <p><?= htmlspecialchars($greeting) ?></p>
     <?php } ?>
 
+    <a href="?action=profile">Profile</a>
     <a href="?action=logout">Deconnexion</a>
-    
 </body>
 </html>

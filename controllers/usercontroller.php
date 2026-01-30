@@ -2,6 +2,7 @@
 session_start();
 require_once "models/user.php";
 
+
 class UserController {
     private $pdo;
 
@@ -29,9 +30,11 @@ class UserController {
                     $hash = $resultat["password"];
 
                     if(password_verify($password, $hash)) {
-                        $success = "Vous êtes connecté";
                         $_SESSION['user_id'] = $resultat["id"];
+                        $_SESSION['role'] = $resultat['role'];
 
+                        header("Location: ?action=profile");
+                        exit;            
                         } else {
                     }
 
@@ -76,7 +79,45 @@ class UserController {
     }
 
     public function profile() {
-        require 'views/profile.php';
+        $greeting = null;
+
+        if(!isset($_SESSION['user_id'])) {
+            header("Location: ?action=login");
+            exit;
+
+        } else {
+            $greeting = "Bonjour!";
+            require 'views/profile.php';
+
+        }
+
+    }
+
+    public function adminPage() { 
+        $greeting = null;
+
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: ?action=login");
+            exit;
+        }
+
+        if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+            $greeting = "Bonjour admin";
+
+            require 'views/adminPage.php';
+            exit;
+        } else {
+            header("Location: ?action=profile");
+            exit;            
+        }
+    }
+
+    public function logout() {
+        session_unset();
+        session_destroy();
+
+        header("Location: ?action=login");
+        exit;
     }
 }
 

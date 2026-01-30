@@ -19,9 +19,18 @@ case 'login':
         break;
 
     case 'profile':
-        $controller = new UserController();
-        $controller->profle();
+        $controller = new UserController($pdo);
+        $controller->profile();
         break;
+    
+    case 'adminPage':
+        $controller = new UserController($pdo);
+        $controller->adminPage();
+        break;
+    
+    case 'logout':
+        $controller = new UserController($pdo);
+        $controller->logout();
 
     default:
         echo "Page non trouvée";
