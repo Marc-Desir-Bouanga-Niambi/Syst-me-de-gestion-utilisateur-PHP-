@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "models/user.php";
 
 
@@ -104,6 +103,9 @@ class UserController {
         if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
             $greeting = "Bonjour admin";
 
+            $userModel = new user($this->pdo);
+            $users = $userModel->getAllUsers();
+
             require 'views/adminPage.php';
             exit;
         } else {
@@ -112,6 +114,8 @@ class UserController {
         }
     }
 
+
+
     public function logout() {
         session_unset();
         session_destroy();
@@ -119,6 +123,8 @@ class UserController {
         header("Location: ?action=login");
         exit;
     }
+
+
 }
 
 ?>

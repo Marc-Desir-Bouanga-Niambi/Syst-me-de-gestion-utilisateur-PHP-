@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once 'controllers/usercontroller.php';
 require_once 'database.php';
 
@@ -31,6 +33,7 @@ case 'login':
     case 'logout':
         $controller = new UserController($pdo);
         $controller->logout();
+        break;
 
     default:
         echo "Page non trouvée";
