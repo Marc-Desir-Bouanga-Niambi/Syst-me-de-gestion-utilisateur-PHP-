@@ -31,10 +31,12 @@ class UserController {
                     if(password_verify($password, $hash)) {
                         $_SESSION['user_id'] = $resultat["id"];
                         $_SESSION['role'] = $resultat['role'];
+                        $_SESSION['email'] = $resultat['email'];
 
                         header("Location: ?action=profile");
                         exit;            
                         } else {
+                            $error = "Mot de passe incorrect";
                     }
 
                 } else {
@@ -46,7 +48,7 @@ class UserController {
             }
         }
 
-        require 'views/login.php';
+        require 'views/auth/login.php';
     }
 
     public function register($method) {
@@ -74,7 +76,7 @@ class UserController {
             }
         }
 
-        require 'views/register.php';
+        require 'views/auth/register.php';
     }
 
     public function profile() {
@@ -85,8 +87,9 @@ class UserController {
             exit;
 
         } else {
-            $greeting = "Bonjour!";
-            require 'views/profile.php';
+            $greeting = "Bonjour ".$_SESSION['email'];
+            
+            require 'views/user/profile.php';
 
         }
 
@@ -101,12 +104,12 @@ class UserController {
         }
 
         if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-            $greeting = "Bonjour admin";
+            $greeting = "Bonjour ". $_SESSION['email'];
 
             $userModel = new user($this->pdo);
             $users = $userModel->getAllUsers();
 
-            require 'views/adminPage.php';
+            require 'views/admin/adminPage.php';
             exit;
         } else {
             header("Location: ?action=profile");

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <form action="" method='POST'>
@@ -13,6 +14,7 @@
         <label for="password">Veuillez rentrez votre mot de passe : </label><br>
         <input type="password" name="password"><br><br>
         
+        <a href="?action=login">Connectez vous!</a>
         <button type="submit">Envoyer</button>
     </form>
 
